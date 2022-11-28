@@ -1,5 +1,5 @@
 /**
- * Quest Tracker v1.0.0 (beta) by @bumbleshoot
+ * Quest Tracker v1.0.1 (beta) by @bumbleshoot
  *
  * See GitHub page for info & setup instructions:
  * https://github.com/bumbleshoot/quest-tracker
@@ -392,7 +392,7 @@ function processTrigger() {
     if (rewards.length > 0 && rewards[0].type == "egg") {
       neededIndividual = 20 / rewards[0].qty;
       for (member of members) {
-        let timesCompleted = Math.min(member.numEachEggOwnedUsed[rewards[0].key] / rewards[0].qty, neededIndividual);
+        let timesCompleted = Math.min(member.numEachEggOwnedUsed[rewards[0].key] || 0 / rewards[0].qty, neededIndividual);
         completedIndividual[member.auth.local.username] = Math.floor(Math.ceil(neededIndividual) * timesCompleted / neededIndividual);
       }
     } else if (rewards.length > 0 && (rewards[0].type == "hatchingPotion" || rewards[0].type == "wackyPotion")) {
@@ -402,7 +402,7 @@ function processTrigger() {
         neededIndividual = 9 / rewards[0].qty;
       }
       for (member of members) {
-        let timesCompleted = Math.min(member.numEachPotionOwnedUsed[rewards[0].key] / rewards[0].qty, neededIndividual);
+        let timesCompleted = Math.min(member.numEachPotionOwnedUsed[rewards[0].key] || 0 / rewards[0].qty, neededIndividual);
         completedIndividual[member.auth.local.username] = Math.floor(Math.ceil(neededIndividual) * timesCompleted / neededIndividual);
       }
     } else {
