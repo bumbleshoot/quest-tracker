@@ -1,5 +1,5 @@
 /**
- * Quest Tracker v1.0.2 (beta) by @bumbleshoot
+ * Quest Tracker v1.0.3 (beta) by @bumbleshoot
  *
  * See GitHub page for info & setup instructions:
  * https://github.com/bumbleshoot/quest-tracker
@@ -458,22 +458,12 @@ function processTrigger() {
       // if rewards are the same
       if (eggQuests[i].rewards.map(x => JSON.stringify(x)).sort((a, b) => a.localeCompare(b)).join(",") === eggQuests[j].rewards.map(x => JSON.stringify(x)).sort((a, b) => a.localeCompare(b)).join(",")) {
 
-        // combine neededIndividual
-        let neededIndividual = Math.max(eggQuests[i].neededIndividual, eggQuests[j].neededIndividual);
-
-        // combine completedIndividual
-        let completedIndividual = {};
-        for (key of Object.keys(eggQuests[i].completedIndividual)) {
-          let timesCompleted = Math.min(eggQuests[i].completedIndividual[key] + eggQuests[j].completedIndividual[key], neededIndividual);
-          completedIndividual[key] = timesCompleted;
-        }
-
-        // combine everything else & save to quest list
+        // combine quest data & save to quest list
         eggQuests.push({
           name: eggQuests[i].name + " OR " + eggQuests[j].name,
           rewards: eggQuests[i].rewards,
-          neededIndividual,
-          completedIndividual
+          neededIndividual: Math.max(eggQuests[i].neededIndividual, eggQuests[j].neededIndividual),
+          completedIndividual: eggQuests[i].completedIndividual
         });
 
         // delete individual quests
