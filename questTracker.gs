@@ -1,5 +1,5 @@
 /**
- * Quest Tracker v1.0.4 (beta) by @bumbleshoot
+ * Quest Tracker v1.0.5 (beta) by @bumbleshoot
  *
  * See GitHub page for info & setup instructions:
  * https://github.com/bumbleshoot/quest-tracker
@@ -35,7 +35,8 @@ function install() {
   // if settings are valid
   if (validateConstants()) {
 
-    // delete webhook
+    // delete trigger & webhook
+    deleteTrigger();
     deleteWebhook();
 
     // update quest tracker
@@ -50,7 +51,8 @@ function install() {
 
 function uninstall() {
 
-  // delete webhook
+  // delete trigger & webhook
+  deleteTrigger();
   deleteWebhook();
 
   console.log("Done!");
@@ -120,6 +122,18 @@ function validateConstants() {
   }
 
   return valid;
+}
+
+function deleteTrigger() {
+  let triggers = ScriptApp.getProjectTriggers();
+  if (triggers.length > 0) {
+
+    console.log("Deleting trigger");
+
+    for (trigger of triggers) {
+      ScriptApp.deleteTrigger(trigger);
+    }
+  }
 }
 
 function deleteWebhook() {
