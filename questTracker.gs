@@ -1,5 +1,5 @@
 /**
- * Quest Tracker v1.0.7 (beta) by @bumbleshoot
+ * Quest Tracker v1.0.8 (beta) by @bumbleshoot
  *
  * See GitHub page for info & setup instructions:
  * https://github.com/bumbleshoot/quest-tracker
@@ -285,6 +285,10 @@ function processTrigger() {
     // if success, return response
     if (response.getResponseCode() < 300 || (response.getResponseCode() === 404 && (url === "https://habitica.com/api/v3/groups/party" || url.startsWith("https://habitica.com/api/v3/groups/party/members")))) {
       return response;
+
+    // if rate limited due to running multiple scripts, try again
+    } else if (response.getResponseCode() === 429) {
+      i--;
 
     // if 3xx or 4xx or failed 3 times, throw exception
     } else if (response.getResponseCode() < 500 || i >= 2) {
