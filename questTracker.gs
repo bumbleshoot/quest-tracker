@@ -1,5 +1,5 @@
 /**
- * Quest Tracker v1.0.8 (beta) by @bumbleshoot
+ * Quest Tracker v1.0.9 (beta) by @bumbleshoot
  *
  * See GitHub page for info & setup instructions:
  * https://github.com/bumbleshoot/quest-tracker
@@ -130,7 +130,7 @@ function deleteTriggers() {
 
     console.log("Deleting triggers");
 
-    for (trigger of triggers) {
+    for (let trigger of triggers) {
       ScriptApp.deleteTrigger(trigger);
     }
   }
@@ -142,7 +142,7 @@ function deleteWebhook() {
 
     console.log("Deleting webhook");
 
-    for (webhook of webhooks) {
+    for (let webhook of webhooks) {
       if (webhook.url == WEB_APP_URL) {
         fetch("https://habitica.com/api/v3/user/webhook/" + webhook.id, DELETE_PARAMS);
       }
@@ -181,7 +181,7 @@ function createWebhook() {
 
     // create temporary trigger to update the quest tracker
     let triggerNeeded = true;
-    for (trigger of ScriptApp.getProjectTriggers()) {
+    for (let trigger of ScriptApp.getProjectTriggers()) {
       if (trigger.getHandlerFunction() === "processTrigger") {
         triggerNeeded = false;
         break;
@@ -214,7 +214,7 @@ function processTrigger() {
   try {
 
     // delete temporary triggers
-    for (trigger of ScriptApp.getProjectTriggers()) {
+    for (let trigger of ScriptApp.getProjectTriggers()) {
       ScriptApp.deleteTrigger(trigger);
     }
 
@@ -313,10 +313,10 @@ function processTrigger() {
   })
 
   // get # each egg & hatching potion owned/used for each member
-  for (member of members) {
+  for (let member of members) {
     member.numEachEggOwnedUsed = member.items.eggs;
     member.numEachPotionOwnedUsed = member.items.hatchingPotions;
-    for ([pet, amount] of Object.entries(member.items.pets)) {
+    for (let [pet, amount] of Object.entries(member.items.pets)) {
       if (amount > 0) { // 5 = newly hatched pet, >5 = fed pet, -1 = mount but no pet
         pet = pet.split("-");
         let species = pet[0];
@@ -333,7 +333,7 @@ function processTrigger() {
         }
       }
     }
-    for (mount of Object.keys(member.items.mounts)) {
+    for (let mount of Object.keys(member.items.mounts)) {
       mount = mount.split("-");
       let species = mount[0];
       let color = mount[1];
@@ -352,15 +352,15 @@ function processTrigger() {
 
   // get lists of premium eggs, premium hatching potions & wacky hatching potions
   let premiumEggs = [];
-  for (egg of Object.values(content.questEggs)) {
+  for (let egg of Object.values(content.questEggs)) {
     premiumEggs.push(egg.key);
   }
   let premiumHatchingPotions = [];
-  for (potion of Object.values(content.premiumHatchingPotions)) {
+  for (let potion of Object.values(content.premiumHatchingPotions)) {
     premiumHatchingPotions.push(potion.key);
   }
   let wackyHatchingPotions = [];
-  for (potion of Object.values(content.wackyHatchingPotions)) {
+  for (let potion of Object.values(content.wackyHatchingPotions)) {
     wackyHatchingPotions.push(potion.key);
   }
 
@@ -373,7 +373,7 @@ function processTrigger() {
   let achievementQuests = [];
 
   // for each quest
-  for (quest of Object.values(content.quests)) {
+  for (let quest of Object.values(content.quests)) {
 
     // if world boss, skip it
     if (quest.category == "world") {
@@ -384,7 +384,7 @@ function processTrigger() {
     let rewards = [];
     if (typeof quest.drop.items !== "undefined") {
 
-      for (drop of quest.drop.items) {
+      for (let drop of quest.drop.items) {
 
         let rewardName = drop.text;
         let rewardType = "";
@@ -425,7 +425,7 @@ function processTrigger() {
     let completedIndividual = {};
     if (rewards.length > 0 && rewards[0].type == "egg") {
       neededIndividual = 20 / rewards[0].qty;
-      for (member of members) {
+      for (let member of members) {
         if (typeof member.numEachEggOwnedUsed[rewards[0].key] === "undefined") {
           member.numEachEggOwnedUsed[rewards[0].key] = 0;
         }
@@ -438,7 +438,7 @@ function processTrigger() {
       } else {
         neededIndividual = 9 / rewards[0].qty;
       }
-      for (member of members) {
+      for (let member of members) {
         if (typeof member.numEachPotionOwnedUsed[rewards[0].key] === "undefined") {
           member.numEachPotionOwnedUsed[rewards[0].key] = 0;
         }
@@ -447,9 +447,9 @@ function processTrigger() {
       }
     } else {
       neededIndividual = 1;
-      for (member of members) {
+      for (let member of members) {
         let timesCompleted = 0;
-        for ([questKey, completions] of Object.entries(member.achievements.quests)) {
+        for (let [questKey, completions] of Object.entries(member.achievements.quests)) {
           if (questKey == quest.key) {
             timesCompleted = Math.min(completions, neededIndividual);
             break;
