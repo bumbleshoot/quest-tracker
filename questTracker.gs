@@ -1,5 +1,5 @@
 /**
- * Quest Tracker v1.0.9 (beta) by @bumbleshoot
+ * Quest Tracker v1.0.10 (beta) by @bumbleshoot
  *
  * See GitHub page for info & setup instructions:
  * https://github.com/bumbleshoot/quest-tracker
@@ -237,8 +237,8 @@ function processTrigger() {
  * Wrapper for Google Apps Script's UrlFetchApp.fetch(url, params):
  * https://developers.google.com/apps-script/reference/url-fetch/url-fetch-app#fetchurl,-params
  * 
- * Retries failed API calls up to 2 times & handles Habitica's rate 
- * limiting.
+ * Retries failed API calls up to 2 times, retries for up to 1 min if 
+ * Habitica's servers are down, & handles Habitica's rate limiting.
  */
  function fetch(url, params) {
 
@@ -246,8 +246,9 @@ function processTrigger() {
   for (let i=0; i<3; i++) {
 
     // if rate limit reached
-    let rateLimitRemaining = scriptProperties.getProperty("X-RateLimit-Remaining");
-    let rateLimitReset = scriptProperties.getProperty("X-RateLimit-Reset");
+    let properties = scriptProperties.getProperties();
+    let rateLimitRemaining = properties["X-RateLimit-Remaining"];
+    let rateLimitReset = properties["X-RateLimit-Reset"];
     if (rateLimitRemaining != null && Number(rateLimitRemaining) < 1) {
 
       // wait until rate limit reset
