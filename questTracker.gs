@@ -1,5 +1,5 @@
 /**
- * Quest Tracker v1.0.10 (beta) by @bumbleshoot
+ * Quest Tracker v1.0.11 (beta) by @bumbleshoot
  *
  * See GitHub page for info & setup instructions:
  * https://github.com/bumbleshoot/quest-tracker
@@ -240,15 +240,14 @@ function processTrigger() {
  * Retries failed API calls up to 2 times, retries for up to 1 min if 
  * Habitica's servers are down, & handles Habitica's rate limiting.
  */
- function fetch(url, params) {
+let rateLimitRemaining;
+let rateLimitReset;
+function fetch(url, params) {
 
   // try up to 3 times
   for (let i=0; i<3; i++) {
 
     // if rate limit reached
-    let properties = scriptProperties.getProperties();
-    let rateLimitRemaining = properties["X-RateLimit-Remaining"];
-    let rateLimitReset = properties["X-RateLimit-Reset"];
     if (rateLimitRemaining != null && Number(rateLimitRemaining) < 1) {
 
       // wait until rate limit reset
@@ -278,10 +277,8 @@ function processTrigger() {
     }
 
     // store rate limiting data
-    scriptProperties.setProperties({
-      "X-RateLimit-Reset": response.getHeaders()["x-ratelimit-reset"],
-      "X-RateLimit-Remaining": response.getHeaders()["x-ratelimit-remaining"]
-    });
+    rateLimitRemaining = response.getHeaders()["x-ratelimit-remaining"];
+    rateLimitReset = response.getHeaders()["x-ratelimit-reset"];
 
     // if success, return response
     if (response.getResponseCode() < 300 || (response.getResponseCode() === 404 && (url === "https://habitica.com/api/v3/groups/party" || url.startsWith("https://habitica.com/api/v3/groups/party/members")))) {
