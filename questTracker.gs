@@ -1,5 +1,5 @@
 /**
- * Quest Tracker v1.0.11 (beta) by @bumbleshoot
+ * Quest Tracker v1.0.12 (beta) by @bumbleshoot
  *
  * See GitHub page for info & setup instructions:
  * https://github.com/bumbleshoot/quest-tracker
@@ -118,7 +118,7 @@ function validateConstants() {
   }
 
   if (!valid) {
-    console.log("Please fix the above errors, create a new version of the existing deployment (or create a new deployment if you haven't created one already), then run the install function again.");
+    console.log("Please fix the above errors, create a new version of the deployment, and run the install function again. If you aren't sure how to do this, see \"Changing the Settings\" in the documentation for this script.");
   }
 
   return valid;
