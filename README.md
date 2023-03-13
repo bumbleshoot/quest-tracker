@@ -4,7 +4,7 @@ Automatically updates a [Google Sheet](https://www.google.ca/sheets/about/) in t
 [<img title="Quest Tracker spreadsheet" src="https://github.com/bumbleshoot/quest-tracker/blob/main/quest-tracker.png?raw=true" width="250">](https://github.com/bumbleshoot/quest-tracker/blob/main/quest-tracker.png?raw=true)
 
 ## Setup Instructions
-You need to use a desktop computer for this. It will not work on a phone or tablet!
+It is highly recommended that you use a desktop computer for this, as some of the steps don't work well on mobile.
 1. Click [here](https://script.google.com/d/1l7WWIuc0V0e1He3Nr3rByrO8HqoXqUUk0HA3bi7oMyDoyLra892fo6vr/edit?usp=sharing) to go to the Quest Tracker script. If you're not already signed into your Google account, you will be asked to sign in.
 2. In the main menu on the left, click on "Overview" (looks like a lowercase letter i inside a circle).
 3. Click the "Make a copy" button (looks like two pages of paper).
@@ -14,7 +14,7 @@ You need to use a desktop computer for this. It will not work on a phone or tabl
 7. [Create a new Google Sheet](https://sheets.google.com/create) and name it something like "[Party Name] Quest Tracker". Click the "Share" button near the top right corner of the page (looks like a little person). Click the dropdown under "General access", and select "Anyone with the link". Then click the "Copy link" button.
 8. Skip the line that says `const WEB_APP_URL = "";`. We will come back to that later. Paste the spreadsheet URL inside the quotations where it says `const QUEST_TRACKER_SPREADSHEET_URL = "";`. If you've changed the tab name for the sheet you want to print the Quest Tracker to, paste the tab name inside the quotes where it says `const QUEST_TRACKER_SPREADSHEET_TAB_NAME = "";`.
 9. Click the "Save project" button near the top of the page (looks like a floppy disk).
-10. Click the blue "Deploy" button near the top of the page, then click "New deployment". Under "Description", type "Quest Tracker" (without the quotes). Then click the "Deploy" button.
+10. Click the blue "Deploy" button near the top of the page, then click "New deployment", then click the "Deploy" button.
 11. Click the "Authorize access" button and select your Google account. Click on "Advanced", then "Go to Quest Tracker (unsafe)". (Don't worry, it is safe!) Then click the "Allow" button.
 12. Under "Web app", click the "Copy" button to copy the Web App URL. Then click the "Done" button.
 13. Paste your Web App URL inside the quotations where it says `const WEB_APP_URL = "";`.
@@ -25,7 +25,7 @@ You need to use a desktop computer for this. It will not work on a phone or tabl
 You're all done! If you need to change the settings or uninstall the script at some point, follow the steps below.
 
 ## Changing the Settings
-You need to use a desktop computer for this. It will not work on a phone or tablet!
+It is highly recommended that you use a desktop computer for this, as some of the steps don't work well on mobile.
 1. [Click here](https://script.google.com/home) to see a list of your scripts. If you're not already signed into your Google account, click the "Start Scripting" button and sign in. Then click on "My Projects" in the main menu on the left.
 2. Click on "Quest Tracker".
 3. Edit the settings (`const`s) to your liking.
@@ -35,6 +35,7 @@ You need to use a desktop computer for this. It will not work on a phone or tabl
 7. Click the "Deploy" button, then the "Done" button.
 
 ## Uninstalling the Script
+It is highly recommended that you use a desktop computer for this, as some of the steps don't work well on mobile.
 1. [Click here](https://script.google.com/home) to see a list of your scripts. If you're not already signed into your Google account, click the "Start Scripting" button and sign in. Then click on "My Projects" in the main menu on the left.
 2. Click on "Quest Tracker".
 3. Click the drop-down menu to the right of the "Debug" button, near the top of the page. Select "uninstall" from the drop-down.
@@ -43,7 +44,7 @@ You need to use a desktop computer for this. It will not work on a phone or tabl
 6. Click the "Archive" button (looks like a box with a down arrow inside). Then click the "Done" button.
 
 ## Updating the Script
-You need to use a desktop computer for this. It will not work on a phone or tablet!
+It is highly recommended that you use a desktop computer for this, as some of the steps don't work well on mobile.
 1. Follow the steps in [Uninstalling the Script](#uninstalling-the-script) above.
 2. Copy & paste your settings (`const`s) into a text editor so you can reference them while setting up the new version.
 3. In the main menu on the left, click on "Overview" (looks like a lowercase letter i inside a circle).
