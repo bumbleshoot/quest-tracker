@@ -1,5 +1,5 @@
 /**
- * Quest Tracker v1.0.13 (beta) by @bumbleshoot
+ * Quest Tracker v1.0.14 (beta) by @bumbleshoot
  *
  * See GitHub page for info & setup instructions:
  * https://github.com/bumbleshoot/quest-tracker
@@ -176,8 +176,11 @@ function createWebhook() {
  * 
  * This function is called by webhooks.
  */
- function doPost(e) {
+let webhook;
+function doPost(e) {
   try {
+
+    webhook = true;
 
     // create temporary trigger to update the quest tracker
     let triggerNeeded = true;
@@ -261,7 +264,6 @@ function fetch(url, params) {
 
     // call API
     let response;
-    let addressUnavailable = 0;
     while (true) {
       try {
         response = UrlFetchApp.fetch(url, params);
@@ -269,8 +271,7 @@ function fetch(url, params) {
 
       // if address unavailable, wait 5 seconds & try again
       } catch (e) {
-        if (addressUnavailable < 12 && e.stack.includes("Address unavailable")) {
-          addressUnavailable++;
+        if (!webhook && e.stack.includes("Address unavailable")) {
           Utilities.sleep(5000);
         } else {
           throw e;
