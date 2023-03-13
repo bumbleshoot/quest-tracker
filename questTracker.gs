@@ -1,5 +1,5 @@
 /**
- * Quest Tracker v1.0.14 (beta) by @bumbleshoot
+ * Quest Tracker v1.0.15 (beta) by @bumbleshoot
  *
  * See GitHub page for info & setup instructions:
  * https://github.com/bumbleshoot/quest-tracker
@@ -198,13 +198,15 @@ function doPost(e) {
     }
 
   } catch (e) {
-    MailApp.sendEmail(
-      Session.getEffectiveUser().getEmail(),
-      DriveApp.getFileById(ScriptApp.getScriptId()).getName() + " failed!",
-      e.stack
-    );
-    console.error(e.stack);
-    throw e;
+    if (!e.stack.includes("Address unavailable")) {
+      MailApp.sendEmail(
+        Session.getEffectiveUser().getEmail(),
+        DriveApp.getFileById(ScriptApp.getScriptId()).getName() + " failed!",
+        e.stack
+      );
+      console.error(e.stack);
+      throw e;
+    }
   }
 }
 
