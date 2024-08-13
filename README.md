@@ -5,7 +5,7 @@ Automatically updates a [Google Sheet](https://www.google.ca/sheets/about/) in t
 
 ## Setup Instructions
 It is highly recommended that you use a desktop computer for this, as some of the steps don't work well on mobile.
-1. Click [here](https://script.google.com/d/1l7WWIuc0V0e1He3Nr3rByrO8HqoXqUUk0HA3bi7oMyDoyLra892fo6vr?usp=sharing) to go to the Quest Tracker script. If you're not already signed into your Google account, you will be asked to sign in.
+1. Click [here](https://script.google.com/home/projects/1l7WWIuc0V0e1He3Nr3rByrO8HqoXqUUk0HA3bi7oMyDoyLra892fo6vr/) to go to the Quest Tracker script. If you're not signed into your Google account, click on "Start Scripting", then sign in, then click on the script link again.
 2. Click the "Make a copy" button (looks like two pages of paper).
 3. At the top of your screen, click on "Copy of Quest Tracker". Rename it "Quest Tracker" and click the "Rename" button.
 4. Click [here](https://habitica.com/user/settings/api) to open your API Settings. Highlight and copy your User ID (it looks something like this: `35c3fb6f-fb98-4bc3-b57a-ac01137d0847`). In the Quest Tracker script, paste your User ID between the quotations where it says `const USER_ID = "";`. It should now look something like this: `const USER_ID = "35c3fb6f-fb98-4bc3-b57a-ac01137d0847";`
